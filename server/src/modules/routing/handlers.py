@@ -53,11 +53,9 @@ def get_go_link(path):
   shortpath_parts = provided_shortpath.split('/', 1)
   shortpath = '/'.join([shortpath_parts[0].lower()] + shortpath_parts[1:])
   
-  if not self.user_email:
-      self.user_email = 'open@intuix.com'
-      self.user_org = 'intuix.com'
-
   if not getattr(current_user, 'email', None):
+    get_or_create_user('open@intuix.com','intuix.com')
+
     if request.args.get('s') == 'crx' and request.args.get('sc'):
       # see: go/484356182846856
       return force_to_original_url()
