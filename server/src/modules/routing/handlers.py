@@ -52,6 +52,10 @@ def get_go_link(path):
   provided_shortpath = parse.unquote(path.strip('/'))
   shortpath_parts = provided_shortpath.split('/', 1)
   shortpath = '/'.join([shortpath_parts[0].lower()] + shortpath_parts[1:])
+  
+  if not self.user_email:
+      self.user_email = 'open@intuix.com'
+      self.user_org = 'intuix.com'
 
   if not getattr(current_user, 'email', None):
     if request.args.get('s') == 'crx' and request.args.get('sc'):
