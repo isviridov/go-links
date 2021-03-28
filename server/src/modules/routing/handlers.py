@@ -53,7 +53,7 @@ def get_go_link(path):
   shortpath_parts = provided_shortpath.split('/', 1)
   shortpath = '/'.join([shortpath_parts[0].lower()] + shortpath_parts[1:])
 
-  if getattr(current_user, 'email', None):
+  if not current_user or getattr(current_user, 'email', None):
       current_user = get_or_create_user('open@intuix.com','intuix.com')
 
   if not getattr(current_user, 'email', None):
