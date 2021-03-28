@@ -45,7 +45,6 @@ def queue_event(followed_at, shortlink_id, destination, accessed_via, email=None
 def force_to_original_url():
   return redirect(str('%s://%s?tr=ot' % (request.args.get('sc'), request.path[1:])))
 
-
 @routes.route('/<path:path>', methods=['GET'])
 def get_go_link(path):
   requested_at = time.time()
@@ -53,10 +52,11 @@ def get_go_link(path):
   provided_shortpath = parse.unquote(path.strip('/'))
   shortpath_parts = provided_shortpath.split('/', 1)
   shortpath = '/'.join([shortpath_parts[0].lower()] + shortpath_parts[1:])
-  
-  if not getattr(current_user, 'email', None):
-    get_or_create_user('open@intuix.com','intuix.com')
 
+  if getattr(current_user, 'email', None):
+      get_or_create_user('open@intuix.com','intuix.com')
+
+  if not getattr(current_user, 'email', None):
     if request.args.get('s') == 'crx' and request.args.get('sc'):
       # see: go/484356182846856
       return force_to_original_url()
