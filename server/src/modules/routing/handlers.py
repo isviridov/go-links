@@ -54,7 +54,7 @@ def get_go_link(path):
   shortpath = '/'.join([shortpath_parts[0].lower()] + shortpath_parts[1:])
 
   if getattr(current_user, 'email', None):
-      get_or_create_user('open@intuix.com','intuix.com')
+      current_user = get_or_create_user('open@intuix.com','intuix.com')
 
   if not getattr(current_user, 'email', None):
     if request.args.get('s') == 'crx' and request.args.get('sc'):
