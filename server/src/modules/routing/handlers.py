@@ -5,6 +5,7 @@ from flask import Blueprint, request, redirect
 from flask_login import current_user
 
 from modules.links.helpers import get_shortlink
+from modules.users.helpers import get_or_create_user
 from shared_helpers import config
 from shared_helpers.events import enqueue_event
 
