@@ -53,8 +53,11 @@ def get_go_link(path):
   shortpath_parts = provided_shortpath.split('/', 1)
   shortpath = '/'.join([shortpath_parts[0].lower()] + shortpath_parts[1:])
 
-  if not current_user or getattr(current_user, 'email', None):
-      current_user = get_or_create_user('open@intuix.com','intuix.com')
+  DEFAULT_USER = 'open@intuix.com'
+  DEFAULT_ORG = 'intuix.com'
+  global current_user
+  if not current_user.is_authenticated:
+      current_user = get_or_create_user(DEFAULT_USER,DEFAULT_ORG)
 
   if not getattr(current_user, 'email', None):
     if request.args.get('s') == 'crx' and request.args.get('sc'):
